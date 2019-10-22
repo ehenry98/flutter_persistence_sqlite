@@ -1,6 +1,7 @@
 import '../model/Dog.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'dart:developer' as developer;
 
 final dogTable = 'dogs';
 
@@ -15,9 +16,10 @@ class DatabaseProvider {
   }
 
   createDatabase() async {
+    developer.log("lol", name:"Database");
     String directory = await getDatabasesPath();
     String path = join(directory,'dog_database.db');
-    
+
     var database = await openDatabase(path,
       version: 1, onCreate: initDB
     );

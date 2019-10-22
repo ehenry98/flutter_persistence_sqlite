@@ -19,9 +19,9 @@ class Dog {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'name': name,
-      'age': age,
+      'id': this.id,
+      'name': this.name,
+      'age': this.age,
     };
   }
 

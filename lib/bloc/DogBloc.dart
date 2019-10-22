@@ -23,12 +23,12 @@ class DogBloc {
 
   addDog(Dog dog) async {
     await _dogRepository.insertDog(dog);
-    getDogs();
+    _dogController.sink.add(await _dogRepository.allDogs());
   }
 
   updateDog(Dog dog) async {
     await _dogRepository.updateTodo(dog);
-    getDogs();
+    _dogController.sink.add(await _dogRepository.allDogs());
   }
 
   deleteDogById(int id) async {
