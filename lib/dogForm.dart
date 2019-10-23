@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/DogBloc.dart';
 import 'model/Dog.dart';
 
@@ -16,7 +17,6 @@ class _DogFormState extends State<DogForm> {
   TextEditingController nameEditingController = TextEditingController();
   TextEditingController ageEditingController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  DogBloc dogBloc = DogBloc();
 
   @override
   void initState() {
@@ -30,6 +30,8 @@ class _DogFormState extends State<DogForm> {
 
   @override
   Widget build(BuildContext context) {
+    final DogBloc dogBloc = BlocProvider.of<DogBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.edit ? "Edit Dog" : "Add Dog"),
@@ -42,13 +44,15 @@ class _DogFormState extends State<DogForm> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  FlutterLogo(
-                    size: 300,
-                  ),
+                  Image(image: AssetImage('assets/dogs.jpg')),
                   textFormField(nameEditingController, "Name", "Enter Name",
                       Icons.pets, widget.edit ? widget.dog.name : "s"),
-                  textFormField(ageEditingController, "Age", "Enter Age",
-                      Icons.cake, widget.edit ? widget.dog.age.toString() : "5"),
+                  textFormField(
+                      ageEditingController,
+                      "Age",
+                      "Enter Age",
+                      Icons.cake,
+                      widget.edit ? widget.dog.age.toString() : "5"),
                   RaisedButton(
                     color: Colors.red,
                     shape: RoundedRectangleBorder(

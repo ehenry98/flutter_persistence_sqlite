@@ -1,12 +1,13 @@
 import 'package:flutter_app_persistance_sqlite/database/database.dart';
 import 'package:flutter_app_persistance_sqlite/model/Dog.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DogDao {
   final dbProvider = DatabaseProvider.dbProvider;
 
   Future<void> insertDog(Dog dog) async {
     final db = await dbProvider.database; //referencia de la base de datos
-    var result = db.insert(dogTable,dog.toMap());
+    var result = await db.insert('dogs',dog.toMap(),conflictAlgorithm: ConflictAlgorithm.replace);
     return result;
   }
 

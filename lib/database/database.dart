@@ -16,7 +16,6 @@ class DatabaseProvider {
   }
 
   createDatabase() async {
-    developer.log("lol", name:"Database");
     String directory = await getDatabasesPath();
     String path = join(directory,'dog_database.db');
 
